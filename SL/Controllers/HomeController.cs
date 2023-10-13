@@ -10,6 +10,8 @@ namespace SL.Controllers
     {
         public ActionResult Index()
         {
+
+            // Mensaje de prueba
             ViewBag.Title = "Home Page";
 
             return View();
