@@ -23,7 +23,8 @@ namespace BL
                     nuevoEmpleado.Nombre = empleado.Nombre;
                     nuevoEmpleado.ApellidoPaterno = empleado.ApellidoPaterno;
                     nuevoEmpleado.ApellidoMaterno = empleado.ApellidoMaterno;
-                    nuevoEmpleado.IdEstado = empleado.IdEmpleado;
+                    nuevoEmpleado.IdEstado = empleado.CatalogoEntidadFederativa.IdCatalogoEntidadFederativa;
+                   
 
                     context.Empleadoes.Add(nuevoEmpleado);
                     context.SaveChanges();
@@ -63,6 +64,7 @@ namespace BL
                         query.ApellidoMaterno = empleado.ApellidoMaterno;
                         query.IdEstado = empleado.CatalogoEntidadFederativa.IdCatalogoEntidadFederativa;
 
+
                         context.SaveChanges();
                         resultado.Correct = true;
 
@@ -83,7 +85,7 @@ namespace BL
 
 
         // Metodo delete
-        public static ML.Result Delete(ML.Empleado empleado)
+        public static ML.Result Delete(int IdEmpleado)
         {
             ML.Result resultado = new ML.Result();
 
@@ -92,7 +94,7 @@ namespace BL
                 using (DL.DiegoMauricioLeenkenGroupEntities context = new DL.DiegoMauricioLeenkenGroupEntities())
                 {
                     var query = (from tablaempleado in context.Empleadoes
-                                 where tablaempleado.Id == empleado.IdEmpleado
+                                 where tablaempleado.Id == IdEmpleado
                                  select tablaempleado).First();
                     context.Empleadoes.Remove(query);
                     context.SaveChanges();
