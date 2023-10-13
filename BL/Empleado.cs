@@ -1,4 +1,10 @@
-﻿namespace BL
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BL
 {
     public class Empleado
     {
@@ -10,12 +16,12 @@
             // conteido del codigo
             try
             {
-                using (DL.DiegoMauricioLeenkenGroupEntities context =new DL.DiegoMauricioLeenkenGroupEntities())
+                using (DL.DiegoMauricioLeenkenGroupEntities context = new DL.DiegoMauricioLeenkenGroupEntities())
                 {
                     DL.Empleado nuevoEmpleado = new DL.Empleado();
                     nuevoEmpleado.NumeroNomina = empleado.NumeroNomina;
-                    nuevoEmpleado.Nombre=empleado.Nombre;
-                    nuevoEmpleado.ApellidoPaterno=empleado.ApellidoPaterno;
+                    nuevoEmpleado.Nombre = empleado.Nombre;
+                    nuevoEmpleado.ApellidoPaterno = empleado.ApellidoPaterno;
                     nuevoEmpleado.ApellidoMaterno = empleado.ApellidoMaterno;
                     nuevoEmpleado.IdEstado = empleado.IdEmpleado;
 
@@ -30,7 +36,7 @@
             {
                 resultado.Correct = false;
                 resultado.ErrorMessage = ex.Message;
-                resultado.Ex=ex;
+                resultado.Ex = ex;
             }
 
             return resultado;
@@ -44,12 +50,12 @@
 
             try
             {
-                using (DL.DiegoMauricioLeenkenGroupEntities context=new DL.DiegoMauricioLeenkenGroupEntities())
+                using (DL.DiegoMauricioLeenkenGroupEntities context = new DL.DiegoMauricioLeenkenGroupEntities())
                 {
                     var query = (from tablaempleado in context.Empleadoes
                                  where tablaempleado.Id == empleado.IdEmpleado
                                  select tablaempleado).SingleOrDefault();
-                    if (query!=null)
+                    if (query != null)
                     {
                         query.NumeroNomina = empleado.NumeroNomina;
                         query.Nombre = empleado.Nombre;
@@ -58,7 +64,7 @@
                         query.IdEstado = empleado.CatalogoEntidadFederativa.IdCatalogoEntidadFederativa;
 
                         context.SaveChanges();
-                        resultado.Correct=true;
+                        resultado.Correct = true;
 
                     }
 
@@ -68,7 +74,7 @@
             {
 
                 resultado.Correct = false;
-                resultado.ErrorMessage=ex.Message;
+                resultado.ErrorMessage = ex.Message;
                 resultado.Ex = ex;
             }
 
@@ -83,7 +89,7 @@
 
             try
             {
-                using (DL.DiegoMauricioLeenkenGroupEntities context =new DL.DiegoMauricioLeenkenGroupEntities())
+                using (DL.DiegoMauricioLeenkenGroupEntities context = new DL.DiegoMauricioLeenkenGroupEntities())
                 {
                     var query = (from tablaempleado in context.Empleadoes
                                  where tablaempleado.Id == empleado.IdEmpleado
@@ -100,7 +106,7 @@
 
                 resultado.Correct = false;
                 resultado.ErrorMessage = ex.Message;
-                resultado.Ex=ex;
+                resultado.Ex = ex;
             }
 
             return resultado;

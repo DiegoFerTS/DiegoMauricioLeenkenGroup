@@ -317,12 +317,12 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BL\BL.csproj">
-      <Project>{7d563c0d-3a92-4c5b-9465-04071710a4f9}</Project>
+    <ProjectReference Include="..\BLFW\BL.csproj">
+      <Project>{bf1c14e3-9da5-49da-b548-1a40c5e2c6a4}</Project>
       <Name>BL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ML\ML.csproj">
-      <Project>{2bb03c79-53d7-4ebd-8aed-e5fde9b2ca14}</Project>
+    <ProjectReference Include="..\MLFW\ML.csproj">
+      <Project>{303c94e9-3b9e-4296-ba79-f5e4a8b2e2fc}</Project>
       <Name>ML</Name>
     </ProjectReference>
   </ItemGroup>
