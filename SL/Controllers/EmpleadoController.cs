@@ -10,8 +10,83 @@ namespace SL.Controllers
     [RoutePrefix("api/empleado")]
     public class EmpleadoController : ApiController
     {
-       // Aqui vamos a hacer los servicios
+        // Aqui vamos a hacer los servicios
 
+        [Route("{idEmpleado}")]
+        [HttpPost]
+        public IHttpActionResult Add(ML.Empleado empleado)
+        {
+            ML.Result result = BL.Empleado.Add(empleado);
+            if (result.Correct)
+            {
+                return Content(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
 
+        [Route("{idEmpleado}")]
+        [HttpPut]
+        public IHttpActionResult Update(int idEmpelado, [FromBody]ML.Empleado empleado)
+        {
+            empleado.IdEmpleado = idEmpelado;
+            ML.Result result = BL.Empleado.Update(empleado);
+            if (result.Correct)
+            {
+                return Content(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
+
+        [Route("{idEmpleado}")]
+        [HttpDelete]
+        public IHttpActionResult Delete(ML.Empleado empleado)
+        {
+            ML.Result result = BL.Empleado.Delete(empleado);
+            if (result.Correct)
+            {
+                return Content(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
+
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult GetAll()
+        {
+
+            var result = BL.Empleado.GetAll();
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("{idEmpleado}")]
+        [HttpGet]
+        public IHttpActionResult GetById(int idEmpleado)
+        {
+            var result = BL.Empleado.GetById(idEmpleado);
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
