@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DL\DL.csproj" />
     <ProjectReference Include="..\ML\ML.csproj" />
   </ItemGroup>
 
