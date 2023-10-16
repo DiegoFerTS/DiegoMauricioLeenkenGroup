@@ -55,19 +55,21 @@ function CategoriaGetAll() {
 
 function Add() {
 
-    var subcategoria = {
-        IdSubCategoria: 0,
+    var empleado = {
+        IdEmpleado: 0,
+        NumeroNomina:$('#txtNumeroNomina').val(),
         Nombre: $('#txtNombre').val(),
-        Descripcion: $('#txtDescripcion').val(),
-        Categoria: {
-            IdCategoria: $('#ddlCategorias').val()
+        ApellidoPaterno: $('#txtApellidoPaterno').val(),
+        ApellidoMaterno: $('#txtApellidoMaterno').val(),
+        CatalogoEntidadFederativa: {
+            IdCatalogoEntidadFederativa: $('#ddlCatalogoEntidadFederativa').val()
         }
     }
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:14982/api/SubCategoria/Add',
+        url: 'http://localhost:5653/api/empleado/', //ip de tu local
         dataType: 'json',
-        data: subcategoria,
+        data: empleado,
         success: function (result) {
             $('#myModal').modal();
         },
@@ -101,21 +103,22 @@ function GetById(IdSubCategoria) {
 
 function Update() {
 
-    var subcategoria = {
-        IdSubCategoria: $('#txtIdSubCategoria').val(),
+    var empleado = {
+        IdEmpleado: 0,
+        NumeroNomina: $('#txtNumeroNomina').val(),
         Nombre: $('#txtNombre').val(),
-        Descripcion: $('#txtDescripcion').val(),
-        IdCategoria: {
-            IdCategoria: $('#txtIdCategoria').val()
+        ApellidoPaterno: $('#txtApellidoPaterno').val(),
+        ApellidoMaterno: $('#txtApellidoMaterno').val(),
+        CatalogoEntidadFederativa: {
+            IdCatalogoEntidadFederativa: $('#ddlCatalogoEntidadFederativa').val()
         }
-
     }
 
     $.ajax({
-        type: 'POST',
-        url: 'http://localhost:14982/api/SubCategoria/Update',
+        type: 'PUT',
+        url: 'http://localhost:5653/api/empleado/'+empleado.IdEmpleado,
         datatype: 'json',
-        data: subcategoria,
+        data: empleado,
         success: function (result) {
             $('#myModal').modal();
             $('#Modal').modal('show');
@@ -131,12 +134,12 @@ function Update() {
 
 
 
-function Eliminar(IdSubCategoria) {
+function Eliminar(IdEmpleado) {
 
-    if (confirm("¿Estas seguro de eliminar la SubCategoria seleccionada?")) {
+    if (confirm("¿Estas seguro de eliminar al Empleado seleccionado?")) {
         $.ajax({
             type: 'DELETE',
-            url: 'http://localhost:14982/api/SubCategoria/Delete/' + IdSubCategoria,
+            url: 'http://localhost:5653/api/empleado/' + IdEmpleado,
             success: function (result) {
                 $('#myModal').modal();
                 GetAll();
@@ -148,3 +151,6 @@ function Eliminar(IdSubCategoria) {
 
     };
 };
+function Modelo() {
+
+}
