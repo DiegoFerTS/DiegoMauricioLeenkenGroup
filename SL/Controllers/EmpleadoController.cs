@@ -29,9 +29,9 @@ namespace SL.Controllers
 
         [Route("{idEmpleado}")]
         [HttpPut]
-        public IHttpActionResult Update(int idEmpelado, [FromBody]ML.Empleado empleado)
+        public IHttpActionResult Update(int idEmpleado, [FromBody]ML.Empleado empleado)
         {
-            empleado.IdEmpleado = idEmpelado;
+            empleado.IdEmpleado = idEmpleado;
             ML.Result result = BL.Empleado.Update(empleado);
             if (result.Correct)
             {
@@ -45,9 +45,9 @@ namespace SL.Controllers
 
         [Route("{idEmpleado}")]
         [HttpDelete]
-        public IHttpActionResult Delete(ML.Empleado empleado)
+        public IHttpActionResult Delete(int idEmpleado)
         {
-            ML.Result result = BL.Empleado.Delete(empleado);
+            ML.Result result = BL.Empleado.Delete(idEmpleado);
             if (result.Correct)
             {
                 return Content(HttpStatusCode.OK, result);
