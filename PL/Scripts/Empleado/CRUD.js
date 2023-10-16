@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () { //click
     GetAll();
-    //CategoriaGetAll();
+    EntidadFederativaGetAll();
 });
 
 function GetAll() {
@@ -13,7 +13,7 @@ function GetAll() {
             $.each(result.Objects, function (i, empleado) {
                 var filas =
                     '<tr>'
-                    + "<td class='text-center'> <button>  <i class='fa-solid fa-pen-to-square' style='color: blue;'></i> </button> </td>"
+                    + "<td class='text-center'> <button onclick='GetById(" + empleado.IdEmpleado + ");'>  <i class='fa-solid fa-pen-to-square' style='color: blue;'></i> </button> </td>"
                     + "<td class='text-center'>" + empleado.IdEmpleado + "</td>"
                     + "<td class='text-center'>" + empleado.NumeroNomina + "</td>"
                     + "<td class='text-center'>" + empleado.Nombre + "</ td>"
@@ -38,16 +38,16 @@ function GetAll() {
 
 
 
-function CategoriaGetAll() {
+function EntidadFederativaGetAll() {
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:14982/api/Categoria/GetAll',
+        url: 'http://localhost:5653/api/empleado/CatalogoEntidadFederativa',
         success: function (result) {
-            $("#ddlCategorias").append('<option value="' + 0 + '">' + 'Seleccione una opción' + '</option>');
-            $.each(result.Objects, function (i, categoria) {
-                $("#ddlCategorias").append('<option value="'
-                    + categoria.IdCategoria + '">'
-                    + categoria.Descripcion + '</option>');
+            $("#ddlCatalogoEntidadFederativa").append('<option value="' + 0 + '">' + 'Seleccione una opción' + '</option>');
+            $.each(result.Objects, function (i, entidadFederativa) {
+                $("#ddlCatalogoEntidadFederativa").append('<option value="'
+                    + entidadFederativa.IdCatalogoEntidadFederativa + '">'
+                    + entidadFederativa.Estado + '</option>');
             });
         }
     });
@@ -72,6 +72,7 @@ function Add() {
         dataType: 'json',
         data: empleado,
         success: function (result) {
+            alert("Se registro el empleado con exito.");
             $('#myModal').modal();
         },
         error: function (result) {
@@ -81,19 +82,22 @@ function Add() {
 };
 
 
-function GetById(IdSubCategoria) {
+function GetById(idEmpleado) {
+
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:14982/api/Empleado/GetById/' + IdSubCategoria,
+        url: 'http://localhost:5653/api/empleado/1' + idEmpleado,
         success: function (result) {
-            $('#txtIdSubCategoria').val(result.Object.IdSubCategoria);
+            $('#txtId').val(result.Object.IdEmpleado);
+            $('#txtNumeroNomina').val(result.Object.NumeroNomina);
             $('#txtNombre').val(result.Object.Nombre);
-            $('#txtDescripcion').val(result.Object.Descripcion);
-            $('#txtIdCategoria').val(result.Object.Categoria.IdCategoria);
-            $('#ModalUpdate').modal('show');
+            $('#txtApellidoPaterno').val(result.Object.ApellidoPaterno);
+            $('#txtApellidoMaterno').val(result.Object.ApellidoPaterno);
+            $('#ddlCatalogoEntidadFederativa').val(result.Object.CatalogoEntidadFederativa.IdCatalogoEntidadFederativa);
+            $('#formulario').modal('show');
         },
         error: function (result) {
-            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+            alert('Error en la consulta.');
         }
 
 
@@ -105,7 +109,7 @@ function GetById(IdSubCategoria) {
 function Update() {
 
     var empleado = {
-        IdEmpleado: 0,
+        IdEmpleado: $('#txtId').val(),
         NumeroNomina: $('#txtNumeroNomina').val(),
         Nombre: $('#txtNombre').val(),
         ApellidoPaterno: $('#txtApellidoPaterno').val(),
@@ -127,7 +131,7 @@ function Update() {
             Console(respond);
         },
         error: function (result) {
-            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+            alert('Error en la consulta.');
         }
     });
 
@@ -152,6 +156,11 @@ function Eliminar(IdEmpleado) {
 
     };
 };
-function Modelo() {
 
+
+function ShowModal() {
+    $('#formulario').modal('show');
+}
+function HiddenModal() {
+    $('#formulario').modal('hide');
 }
