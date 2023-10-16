@@ -12,7 +12,7 @@ namespace SL.Controllers
     {
         // Aqui vamos a hacer los servicios
 
-        [Route("{idEmpleado}")]
+        [Route("")]
         [HttpPost]
         public IHttpActionResult Add(ML.Empleado empleado)
         {
