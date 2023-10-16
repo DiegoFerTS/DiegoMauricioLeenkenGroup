@@ -21,7 +21,6 @@ namespace BL
                                  {
                                      Id = tablaCatalogoEntidadFederativa.Id,
                                      Nombre = tablaCatalogoEntidadFederativa.Nombre
-
                                  });
 
                     resultado.Objects = new List<object>();
