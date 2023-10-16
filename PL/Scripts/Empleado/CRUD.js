@@ -1,8 +1,7 @@
-﻿// <reference path="SubCategoriaCRUD.js" />
-
+﻿
 $(document).ready(function () { //click
     GetAll();
-    CategoriaGetAll();
+    //CategoriaGetAll();
 });
 
 function GetAll() {
@@ -10,27 +9,29 @@ function GetAll() {
         type: 'GET',
         url: 'http://localhost:5653/api/empleado',
         success: function (result) { //200 OK 
-            $('#TablaEmpleado tbody').empty();
-            $.each(result.Objects, function (i, subCategoria) {
+            $('#tableEmpleado tbody').empty();
+            $.each(result.Objects, function (i, empleado) {
                 var filas =
                     '<tr>'
-                    + '<td class="text-center"> '
-                   
-                    + '</td>'
-                    + "<td  id='id' class='text-center'>" + subCategoria.IdSubCategoria + "</td>"
-                    + "<td class='text-center'>" + subCategoria.Nombre + "</td>"
-                    + "<td class='text-center'>" + subCategoria.Descripcion + "</ td>"
-                    + "<td class='text-center'>" + subCategoria.Categoria.IdCategoria + "</td>"
+                    + "<td class='text-center'> <button>  <i class='fa-solid fa-pen-to-square' style='color: blue;'></i> </button> </td>"
+                    + "<td class='text-center'>" + empleado.IdEmpleado + "</td>"
+                    + "<td class='text-center'>" + empleado.NumeroNomina + "</td>"
+                    + "<td class='text-center'>" + empleado.Nombre + "</ td>"
+                    + "<td class='text-center'>" + empleado.ApellidoPaterno + "</td>"
+                    + "<td class='text-center'>" + empleado.ApellidoMaterno + "</td>"
+                    + "<td class='text-center'>" + empleado.CatalogoEntidadFederativa.Estado + "</td>"
+                    + "<td class='text-center'> <button> <i class='fa-solid fa-trash' style='color: red;'></i> </button> </td>"
+
                     //+ '<td class="text-center">  <a href="#" onclick="return Eliminar(' + subCategoria.IdSubCategoria + ')">' + '<img  style="height: 25px; width: 25px;" src="../img/delete.png" />' + '</a>    </td>'
-                    + '<a href="#" onclick="GetById(' + subCategoria.IdSubCategoria + ')"> <img  style="height: 25px; width: 25px;" src="../img/edit.ico" /> </a> '
-                    + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + subCategoria.IdSubCategoria + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
+                    //+ '<a href="#" onclick="GetById(' + subCategoria.IdSubCategoria + ')"> <img  style="height: 25px; width: 25px;" src="../img/edit.ico" /> </a> '
+                    //+ '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + subCategoria.IdSubCategoria + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
 
                     + "</tr>";
-                $("#SubCategorias tbody").append(filas);
+                $("#tableEmpleado tbody").append(filas);
             });
         },
         error: function (result) {
-            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+            alert('Error en la consulta.');
         }
     });
 };
