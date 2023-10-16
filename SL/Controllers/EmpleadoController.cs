@@ -88,5 +88,21 @@ namespace SL.Controllers
                 return NotFound();
             }
         }
+
+        [Route("CatalogoEntidadFederativa")]
+        [HttpGet]
+        public IHttpActionResult GetAllCatalogoEntidadFederativa()
+        {
+
+            var result = BL.CatalogoEntidadFederativa.GetAll();
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }
