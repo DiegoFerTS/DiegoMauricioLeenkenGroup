@@ -61,7 +61,7 @@ function Operacion() {
     } else {
         Update();
     }
-
+    HiddenModal();
 }
 
 function Add() {
@@ -174,6 +174,7 @@ function ShowModal() {
 }
 function HiddenModal() {
     $('#formulario').modal('hide');
+    $('#txtId').val("");
     $('#txtNumeroNomina').val("");
     $('#txtNombre').val("");
     $('#txtApellidoPaterno').val("");
