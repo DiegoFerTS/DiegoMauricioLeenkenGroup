@@ -20,7 +20,7 @@ function GetAll() {
                     + "<td class='text-center'>" + empleado.ApellidoPaterno + "</td>"
                     + "<td class='text-center'>" + empleado.ApellidoMaterno + "</td>"
                     + "<td class='text-center'>" + empleado.CatalogoEntidadFederativa.Estado + "</td>"
-                    + "<td class='text-center'> <button> <i class='fa-solid fa-trash' style='color: red;'></i> </button> </td>"
+                    + "<td class='text-center'> <button onclick='Delete(" + empleado.IdEmpleado + ")'> <i class='fa-solid fa-trash' style='color: red;'></i> </button> </td>"
 
                     //+ '<td class="text-center">  <a href="#" onclick="return Eliminar(' + subCategoria.IdSubCategoria + ')">' + '<img  style="height: 25px; width: 25px;" src="../img/delete.png" />' + '</a>    </td>'
                     //+ '<a href="#" onclick="GetById(' + subCategoria.IdSubCategoria + ')"> <img  style="height: 25px; width: 25px;" src="../img/edit.ico" /> </a> '
@@ -53,6 +53,16 @@ function EntidadFederativaGetAll() {
     });
 }
 
+function Operacion() {
+    var id = $('#txtId').val();
+
+    if (id == 0 || id == "") {
+        Add();
+    } else {
+        Update();
+    }
+
+}
 
 function Add() {
 
@@ -72,11 +82,12 @@ function Add() {
         dataType: 'json',
         data: empleado,
         success: function (result) {
+            GetAll();
+            $('#formulario').modal('hide');
             alert("Se registro el empleado con exito.");
-            $('#myModal').modal();
         },
         error: function (result) {
-            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+            alert('Error al añadir empleado.');
         }
     });
 };
@@ -86,7 +97,7 @@ function GetById(idEmpleado) {
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:5653/api/empleado/1' + idEmpleado,
+        url: 'http://localhost:5653/api/empleado/' + idEmpleado,
         success: function (result) {
             $('#txtId').val(result.Object.IdEmpleado);
             $('#txtNumeroNomina').val(result.Object.NumeroNomina);
@@ -125,13 +136,13 @@ function Update() {
         datatype: 'json',
         data: empleado,
         success: function (result) {
-            $('#myModal').modal();
-            $('#Modal').modal('show');
             GetAll();
-            Console(respond);
+            $('#formulario').modal('hide');
+            alert("Se actualizo con exito al empleado.");
+
         },
         error: function (result) {
-            alert('Error en la consulta.');
+            alert('Error en la actualizacion.');
         }
     });
 
@@ -139,18 +150,18 @@ function Update() {
 
 
 
-function Eliminar(IdEmpleado) {
+function Delete(IdEmpleado) {
 
     if (confirm("¿Estas seguro de eliminar al Empleado seleccionado?")) {
         $.ajax({
             type: 'DELETE',
             url: 'http://localhost:5653/api/empleado/' + IdEmpleado,
             success: function (result) {
-                $('#myModal').modal();
                 GetAll();
+                alert("Se eliminio al empleado con exito.");
             },
             error: function (result) {
-                alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+                alert('Error en al eliminar.');
             }
         });
 
