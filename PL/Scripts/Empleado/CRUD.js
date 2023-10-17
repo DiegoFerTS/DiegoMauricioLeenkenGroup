@@ -163,4 +163,10 @@ function ShowModal() {
 }
 function HiddenModal() {
     $('#formulario').modal('hide');
+    $('#txtNumeroNomina').val("");
+    $('#txtNombre').val("");
+    $('#txtApellidoPaterno').val("");
+    $('#txtApellidoMaterno').val("");
+    var $limpiarCatalogoEntidadFederativa = $("#ddlCatalogoEntidadFederativa");
+    $limpiarCatalogoEntidadFederativa.val($limpiarCatalogoEntidadFederativa.children('option:first').val());
 }
